@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/static/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<style>
+  .form-signin {
+    max-width: 550px;
+    padding: 15px;
+    margin: 0 auto;
+  }    
+</style>
+
+</head>
+<body>
+
+<div class="container">
+<span class="fa fa-github" style="font-size: 40px;">github</span>
+</div>
+
+
+<div class="container text-center">
+    <form class="form-signin" id="login_form" method="post" action="/">
+      {% csrf_token %}
+
+      <br>
+      <input type="text" name="user" class="form-control" placeholder="Github User Name, e.g: abhi40308" value="" required autofocus>
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Get Data</button>
+    </form>
+</div>
+
+<h1 class="text-center"> Github User Data </h1>
+	<div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped tablesorter">
+                <thead>
+                <tr>
+                  <th class="header"> Username <i class="icon-sort"></i></th>
+                  <th class="header"> Blog <i class="icon-sort"></i></th>
+                  <th class="header"> Public Repos <i class="icon-sort"></i></th>
+                  <th class="header"> Public Gists <i class="icon-sort"></i></th>
+                  <th class="header"> Email <i class="icon-sort"></i></th>
+                  <th class="header"> Followers <i class="icon-sort"></i></th>
+                  <th class="header"> Following <i class="icon-sort"></i></th>
+                </tr>
+                </thead>
+            <tbody>
+            
+            {% for key in data %}
+                <tr>
+                    <td>{{ key.name }}</td>
+                    <td>{{ key.blog }}</td>
+                    <td>{{ key.public_repos }}</td>
+                    <td>{{ key.public_gists }}</td>
+                    <td>{{ key.email }}</td>
+                    <td>{{ key.followers }}</td>
+                    <td>{{ key.following }}</td>
+                </tr>
+            {% endfor %}
+            
+            </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            {% for key in data %}
+            <div class="col-md-6 col-sm-12">
+                <h4>Avatar</h4>
+                <img style="width: 300px; height: 300px;" src={{ key.avatar_url }}>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h4>Bio</h4>
+                {{ key.bio }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
